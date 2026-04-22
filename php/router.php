@@ -11,14 +11,14 @@ $request_uri = $_SERVER['REQUEST_URI'] ?? '/';
 $request_path = parse_url($request_uri, PHP_URL_PATH) ?? '/';
 // Decode the URI to get the actual path
 
+
 // Path traversal mitigation
-$baseDir = realpath(__DIR__ . '/public');
+$baseDir = realpath(__DIR__ . '/../public');
 $requested = realpath($baseDir . $request_path);
 if ($requested === false || strpos($requested, $baseDir) !== 0) {
     http_response_code(404);
     exit('File not found');
 }
-//// $uri = str_replace($baseDir, '', $requested); // $uri is now a safe, relative path
 $uri = rawurldecode($request_path);
 
 if ($uri === '/') {
@@ -32,7 +32,7 @@ if ($uri === '/') {
 if (str_ends_with($uri, '.md')) {
     // Check if the view=html query parameter is present
     if (@$_GET['view'] === 'html') {
-        require __DIR__ . '/php/markdown.php';
+        require __DIR__ . '/markdown.php';
         exit;
     }
 }

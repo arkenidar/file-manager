@@ -1,4 +1,5 @@
 RewriteEngine On
 
 # Redirect all requests to php/router.php (now located in /php)
-RewriteRule ^(.*)$ ../php/router.php [QSA,L]
+
+RewriteRule ^(.\*)$ ../php/router.php [QSA,L]
