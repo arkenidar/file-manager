@@ -2,4 +2,8 @@ RewriteEngine On
 
 # Redirect all requests to php/router.php (now located in /php)
 
+# except existing files but without query-string
+
+RewriteCond %{REQUEST_FILENAME} !-f [OR]
+RewriteCond %{QUERY_STRING} .+
 RewriteRule ^(.\*)$ ../php/router.php [QSA,L]
