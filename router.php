@@ -18,7 +18,8 @@ if ($requested === false || strpos($requested, $baseDir) !== 0) {
     http_response_code(404);
     exit('File not found');
 }
-$uri = str_replace($baseDir, '', $requested); // $uri is now a safe, relative path
+//// $uri = str_replace($baseDir, '', $requested); // $uri is now a safe, relative path
+$uri = rawurldecode($request_path);
 
 if ($uri === '/') {
     $uri = '/index.md?view=html';
