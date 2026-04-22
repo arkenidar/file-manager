@@ -9,7 +9,13 @@
 
 <body>
 
-    <a href="<?= $uri ?>"><?= $uri ?></a>
+    <?php
+    // XSS mitigation: Escape the URI for safe output in HTML
+    $uri = htmlspecialchars($uri, ENT_QUOTES, 'UTF-8');
+    ?>
+    <a href="<?= $uri ?>">
+        <?= $uri ?>
+    </a>
     <div class="markdown-url" data-url="<?= $uri ?>"></div>
 
     <script>
