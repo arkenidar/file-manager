@@ -32,7 +32,7 @@ if ($uri === '/') {
 if (str_ends_with($uri, '.md')) {
     // Check if the view=html query parameter is present
     if (@$_GET['view'] === 'html') {
-        require __DIR__ . '/markdown.php';
+        require __DIR__ . '/../php/markdown.php';
         exit;
     }
 }
