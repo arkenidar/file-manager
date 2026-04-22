@@ -10,7 +10,15 @@ $request_uri = $_SERVER['REQUEST_URI'] ?? '/';
 // Parse the request URI to get the path component
 $request_path = parse_url($request_uri, PHP_URL_PATH) ?? '/';
 // Decode the URI to get the actual path
-$uri = rawurldecode($request_path);
+
+// Path traversal mitigation
+$baseDir = realpath(__DIR__ . '/public');
+$requested = realpath($baseDir . $request_path);
+if ($requested === false || strpos($requested, $baseDir) !== 0) {
+    http_response_code(404);
+    exit('File not found');
+}
+$uri = str_replace($baseDir, '', $requested); // $uri is now a safe, relative path
 
 if ($uri === '/') {
     $uri = '/index.md?view=html';
