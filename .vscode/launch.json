@@ -5,7 +5,7 @@
       "name": "Launch PHP Built-in Server",
       "type": "php",
       "request": "launch",
-      "program": "${workspaceFolder}/router.php",
+      "program": "${workspaceFolder}/php/router.php",
       "cwd": "${workspaceFolder}",
       "port": 9003,
       "serverReadyAction": {
@@ -18,7 +18,7 @@
         "localhost:8080",
         "-t",
         "${workspaceFolder}/public",
-        "${workspaceFolder}/router.php"
+        "${workspaceFolder}/php/router.php"
       ],
       "env": {
         "XDEBUG_MODE": "debug",
