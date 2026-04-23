@@ -1,7 +1,9 @@
 RewriteEngine On
 
-# Redirect all requests to public/router.php (now located in /php)
+# index.php should be accessible directly
+RewriteRule ^$ - [L]
 
+# Redirect all requests to public/router.php (now located in /php)
 # except existing files but without query-string
 
 RewriteCond %{REQUEST_FILENAME} !-f [OR]
