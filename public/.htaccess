@@ -1,11 +1,14 @@
 RewriteEngine On
 
+# Remove only the fbclid query parameter and redirect to the clean URL
+RewriteCond %{QUERY_STRING} (^|&)fbclid=[^&]+(&|$)
+RewriteRule ^ %{REQUEST_URI}?%1 [R=301,L,QSD]
+
 # index.php should be accessible directly
 RewriteRule ^$ - [L]
 
 # Redirect all requests to public/router.php (now located in /php)
 # except existing files but without query-string
-
 RewriteCond %{REQUEST_FILENAME} !-f [OR]
 RewriteCond %{QUERY_STRING} .+
 RewriteRule ^(.*)$ router.php [QSA,L]
